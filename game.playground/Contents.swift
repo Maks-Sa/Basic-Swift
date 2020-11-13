@@ -48,11 +48,11 @@ protocol Attack {
     func blockWarrior (enemy: inout Attack, enemyAlive: inout Alive)
 }
 
-/* Что то пошло не так)
+
 func generateText(typeMove: Int, name: String, enemyName: String, punchBody: String, enemyPunchBody: String, enemyDamage: Int)  -> String{
     var text: String = ""
-    let arrayPartOne = ["потерял самоконтроль и потому безумный ", "пытался что то сказать, и в это время задумчивый ", "расплылся в улыбке, но неожиданно ", "кашлянул и вдруг ", "пытался увернуться, но ", "пытался что-то сказать, но неожиданно непобедимый ", "чесал <вырезано цензурой>, а ", "высморкался, и вдруг, ", "думал о <вырезано цензурой>, вследствие чего "  ]
-    let arrayPartTwo = ["беспричинно саданул сильный удар кулаком в ", "подмигнув размозжил ногой ", "c испугу пронзил ", "прослезившись уколол в ", "влепил рассекающий удар в ", "сделав двойное сальто, обрушил тяжелую ногу на ", "заблокировал удар в ", "остановил удар по ", "парировал удар локтем в "]
+    let arrayPartOne = [" потерял самоконтроль и потому безумный ", " пытался что то сказать, и в это время задумчивый ", " расплылся в улыбке, но неожиданно ", " кашлянул и вдруг ", " пытался увернуться, но ", " пытался что-то сказать, но неожиданно непобедимый ", " чесал <вырезано цензурой>, а ", " высморкался, и вдруг, ", " думал о <вырезано цензурой>, вследствие чего "  ]
+    let arrayPartTwo = [" беспричинно саданул сильный удар кулаком в ", " подмигнув размозжил ногой ", " c испугу пронзил  ", " прослезившись уколол в ", " влепил рассекающий удар в ", " сделав двойное сальто, обрушил тяжелую ногу на  ", " заблокировал удар в ", " остановил удар по ", " парировал удар локтем в "]
    
     if typeMove == 1{
         let arrayBlock = arrayPartTwo[6...8]
@@ -61,12 +61,12 @@ func generateText(typeMove: Int, name: String, enemyName: String, punchBody: Str
     }else {
         let arrayBlock = arrayPartTwo[..<6]
         let arrayBlockText = Array(arrayBlock)
-        text = name + arrayPartOne.randomElement()! + enemyName + arrayBlockText.randomElement()! + enemyPunchBody + enemyDamage
+        text = name + arrayPartOne.randomElement()! + enemyName + arrayBlockText.randomElement()! + enemyPunchBody + "  " + enemyName + " - " + String(enemyDamage)
     }
     
     return text
 }
-*/
+
 class Voin: Alive, Power, InArmor, Attack {
     var arrayPartOfBody = ["голову", "туловище", "ногу"]
     var name: String
@@ -107,12 +107,12 @@ class Voin: Alive, Power, InArmor, Attack {
     func blockWarrior(enemy: inout Attack, enemyAlive: inout Alive) {
         blockBody = arrayPartOfBody.randomElement()!
         if self.blockBody == enemy.punchBody{
-        //    print(generateText(typeMove: 1, name: self.name, enemyName: enemyAlive.name, punchBody: self.blockBody, enemyPunchBody: enemy.punchBody, enemyDamage: enemy.damage))
-          print("\(enemyAlive.name) потерял самоконтроль и потому безумный \(self.name) заблокировал удар в \(blockBody)")
+          print(" \(generateText(typeMove: 1, name: self.name, enemyName: enemyAlive.name, punchBody: self.blockBody, enemyPunchBody: enemy.punchBody, enemyDamage: enemy.damage)) ")
+          //print("\(enemyAlive.name) потерял самоконтроль и потому безумный \(self.name) заблокировал удар в \(blockBody)")
         }else {
             self.health = self.health - enemy.damage
-          //  print(generateText(typeMove: 2, name: self.name, enemyName: enemyAlive.name, punchBody: self.blockBody, enemyPunchBody: enemy.punchBody, enemyDamage: enemy.damage))
-            print("\(self.name) пытался что то сказать, и в это время задумчивый  \(enemyAlive.name) с испугу саданул красивый удар в \(enemy.punchBody) врага.-\(enemy.damage). [\(self.health)/\(self.startHealth)]")
+            print("\(generateText(typeMove: 2, name: self.name, enemyName: enemyAlive.name, punchBody: self.blockBody, enemyPunchBody: enemy.punchBody, enemyDamage: enemy.damage)) [\(self.health)/\(self.startHealth)]")
+           // print("\(self.name) пытался что то сказать, и в это время задумчивый  \(enemyAlive.name) с испугу саданул красивый удар в \(enemy.punchBody) врага.-\(enemy.damage). [\(self.health)/\(self.startHealth)]")
         }
     }
 
